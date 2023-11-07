@@ -1,0 +1,20 @@
+Columns = movie, review_id, name, user_id, note, commentaire
+Num_columns = 6
+
+Train :
+Num_rows = 665962
+
+Dev :
+num_rows = 100400
+
+Format :
+'''
+<comment>
+ <movie>221875</movie>
+ <review_id>review_50879354</review_id>
+ <name>cineccita</name>
+ <user_id>Z20061028091922393442315</user_id>
+ <note>2,5</note>
+ <commentaire>Le réalisateur a oublié le vent, ils sont au coeur d'une énorme tempête mais les cheveux restent figés. On arrive pas à y croire. Ce film vaut tout juste un téléfilm.</commentaire>
+</comment>
+'''
