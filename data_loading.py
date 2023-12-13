@@ -18,6 +18,8 @@ def load_dev_data():
     return dev
 
 
+
+
 train_df = load_train_data()[["note", "commentaire"]]
 print(train_df.tail())
 
