@@ -4,19 +4,11 @@ from torch.utils.data import RandomSampler, DataLoader
 
 
 # loading one line of data only, file is too large :/
-def load_train_data():
-    f_train = open('data/donnees_appr_dev/train.xml', "r")
-    train_xml = f_train.read()
-    train = pd.read_xml(io.StringIO(train_xml))
-    return train
-
-
-def load_dev_data():
-    f_dev = open('data/donnees_appr_dev/dev.xml', "r")
-    dev_xml = f_dev.read()
-    dev = pd.read_xml(io.StringIO(dev_xml))
-    return dev
-
+def load_data(set_name):
+    file_content = open('data/xml/'+set_name+'.xml', "r")
+    xml_content = file.read()
+    df = pd.read_xml(io.StringIO(xml_content))
+    return df
 
 train_df = load_train_data()[["note", "commentaire"]]
 print(train_df.tail())

@@ -50,6 +50,8 @@ def clean_comments(text):
     clean = " ".join(clean.split())
     return clean
 
+
+
 if __name__ == "__main__":
     input_file_train = 'train.xml'
     output_file_train = 'train.csv'
