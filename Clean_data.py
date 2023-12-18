@@ -1,44 +1,43 @@
 import csv
 import xml.etree.ElementTree as ET
 import re
+import nltk
+import spacy
+from spacy.lang.fr.stop_words import STOP_WORDS
+from concurrent.futures import ProcessPoolExecutor
+
+nlp = spacy.load("fr_core_news_sm")
 
 def convert_to_csv(input_file, output_file):
     tree = ET.parse(input_file)
     root = tree.getroot()
-    classes = []
-    commentaires = []
+    rows = []
 
-    for note in root.iter('note'):
-        if(note.text.strip() == "0,5"):
-            classes.append("1")
-        elif(note.text.strip() == "1,0"):
-            classes.append("2")
-        elif(note.text.strip() == "1,5"):
-            classes.append("3")
-        elif(note.text.strip() == "2,0"):
-            classes.append("4")
-        elif(note.text.strip() == "2,5"):
-            classes.append("5")
-        elif(note.text.strip() == "3,0"):
-            classes.append("6")
-        elif(note.text.strip() == "3,5"):
-            classes.append("7")
-        elif(note.text.strip() == "4,0"):
-            classes.append("8")
-        elif(note.text.strip() == "4,5"):
-            classes.append("9")
-        elif(note.text.strip() == "5,0"):
-            classes.append("10")
-    for comment in root.iter('commentaire'):
-        if(comment.text is None):
-            commentaires.append("")
-        else:
-            commentaires.append(clean_comments(comment.text))
+    for element in root:
+        note = element.find('note').text.strip()
+        commentaire = element.find('commentaire').text.strip() if element.find('commentaire').text is not None else ""
+
+        rows.append((note, commentaire))
+
+    with ProcessPoolExecutor() as executor:
+        results = list(executor.map(process_row, rows))
+
     with open(output_file, 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerow(["Note", "Commentaire"])
-        for i in range(len(classes)):
-            writer.writerow([classes[i], commentaires[i]])
+        writer.writerows(results)
+
+def process_row(row):
+    note, commentaire = row
+    clean_comment = clean_comments(commentaire)
+    lemmatized_comment = lemmatize_comments(clean_comment)
+    if(lemmatized_comment is None):
+        sentence = ""
+    else:
+        words = lemmatized_comment.split()
+        filtered_words = [word for word in words if len(word) > 2]
+        sentence = ' '.join(filtered_words)
+    return note, sentence
 
 def clean_comments(text):
     clean = re.sub(r'\n', ' ', text)
@@ -48,7 +47,13 @@ def clean_comments(text):
     clean = re.sub(r'[^\w\s]', ' ', clean)
     clean = clean.lower()
     clean = " ".join(clean.split())
+    clean = ' '.join(word for word in clean.split() if word not in STOP_WORDS)
     return clean
+
+def lemmatize_comments(text):
+    doc = nlp(text)
+    lemmatized_tokens = [token.lemma_ for token in doc]
+    return ' '.join(lemmatized_tokens)
 
 if __name__ == "__main__":
     input_file_train = 'train.xml'

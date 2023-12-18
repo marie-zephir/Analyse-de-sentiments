@@ -1,0 +1,31 @@
+SVM loading ... 
+              precision    recall  f1-score   support
+
+         0,5       0.42      0.70      0.53      5835
+         1,0       0.28      0.07      0.11      4547
+         1,5       0.21      0.02      0.03      3960
+         2,0       0.29      0.32      0.30      8110
+         2,5       0.29      0.16      0.20      8289
+         3,0       0.31      0.37      0.34     13881
+         3,5       0.29      0.19      0.23     14333
+         4,0       0.34      0.56      0.42     18594
+         4,5       0.27      0.04      0.07      9945
+         5,0       0.46      0.62      0.53     12906
+
+    accuracy                           0.35    100400
+   macro avg       0.32      0.30      0.28    100400
+weighted avg       0.33      0.35      0.31    100400
+
+Accuracy: 0.34922310756972114
+
+Precision: It measures how many predicted instances of a class are actually relevant. In your case, for class 0.5, 42% of the predicted instances are true positives, and for class 1.0, it's 28%, and so on for the other classes.
+Recall: It measures how many relevant instances of a class were actually predicted. For class 0.5, 70% of the actual instances are correctly predicted, for class 1.0, it's 7%, and so on.
+F1-Score: It is the harmonic mean of precision and recall. It gives a balance between precision and recall. For class 0.5, it's 53%, for class 1.0, it's 11%, and so on.
+Support: It is the number of actual occurrences of the class in the specified dataset. For class 0.5, there are 5835 instances, for class 1.0, there are 4547 instances, and so on.
+
+Macro Average and Weighted Average:
+
+Macro Avg: It is the average of the precision, recall, and F1-score for each class without considering class imbalance. In this case, the macro average precision is 32%, recall is 30%, and F1-score is 28%.
+Weighted Avg: It is the weighted average of precision, recall, and F1-score, where each class's contribution is weighted by its support. In this case, the weighted average precision is 33%, recall is 35%, and F1-score is 31%.
+
+Accuracy: Overall accuracy of the model on the entire dataset is 34.92%. This means that 34.92% of the predictions made by the model are correct.
