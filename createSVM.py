@@ -28,3 +28,11 @@ train_labels.to_csv('svm_train_labels.csv', index=False)
 # Sauvegarder les notes correspondantes pour le dev
 dev_labels = dev_data['Note']
 dev_labels.to_csv('svm_dev_labels.csv', index=False)
+
+# Sauvegarder les notes encodées pour le train
+train_labels['Note'] = (train_labels['Note'].str.replace(',', '.').astype(float) * 2).astype(int)
+train_labels.to_csv('svm_train_labels' + "_encoded" + '.csv', index=False)
+
+# Sauvegarder les notes encodées pour le dev
+dev_labels['Note'] = (dev_labels['Note'].str.replace(',', '.').astype(float) * 2).astype(int)
+dev_labels.to_csv('svm_dev_labels' + "_encoded" + '.csv', index=False)

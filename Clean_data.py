@@ -5,6 +5,7 @@ import nltk
 import spacy
 from spacy.lang.fr.stop_words import STOP_WORDS
 from concurrent.futures import ProcessPoolExecutor
+import pandas as pd
 
 nlp = spacy.load("fr_core_news_sm")
 
@@ -50,16 +51,15 @@ def clean_comments(text):
     clean = ' '.join(word for word in clean.split() if word not in STOP_WORDS)
     return clean
 
-<<<<<<< HEAD
 
-=======
 def lemmatize_comments(text):
     doc = nlp(text)
     lemmatized_tokens = [token.lemma_ for token in doc]
     return ' '.join(lemmatized_tokens)
->>>>>>> a0e5eb899005abb064b73f3d27b65ccc53e66083
+
 
 if __name__ == "__main__":
+
     input_file_train = 'train.xml'
     output_file_train = 'train.csv'
 
