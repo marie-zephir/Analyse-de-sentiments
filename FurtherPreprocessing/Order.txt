@@ -1,0 +1,22 @@
+Clean_data
+Clean_data_test
+RemoveDoubleLettersAndVerifyIfFrench on each dataset -> modify script each time for each dataset-> remove comments.
+Lemmatise on each dataset -> modify script each time for each dataset-> remove comments.
+RemoveAccents on each dataset -> modify script each time for each dataset-> remove comments.
+
+
+Pour les données du webscraping :
+Clean_data_webscraping
+RemoveDoubleLettersAndVerifyIfFrench on each dataset -> modify script each time for each dataset-> remove comments.
+Lemmatise on each dataset -> modify script each time for each dataset-> remove comments.
+RemoveAccents on each dataset -> modify script each time for each dataset-> remove comments.
+
+
+
+Puis on fait une jointure des données forunies et des données de webscraping sur les données de test et de validation pour qu'il y ait 50 000 critiques en tout pour les classes 0,5 ; 1,0 ; 1,5 dans le train dataset et 8000 critiques en tout sur les mêmes classes pour les données de validation(Join.py)
+
+Une fois la jointure faite on fait :
+
+
+RemoveWordsLessPresent on each dataset -> modify script each time for each dataset-> remove comments.
+UpdatingReviewNumber on each dataset -> modify script each time for each dataset except the test dataset-> remove comments.
