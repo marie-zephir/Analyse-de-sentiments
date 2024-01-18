@@ -1,0 +1,4 @@
+/users/ramarat/.conda/envs/rimsEnv/lib/python3.9/site-packages/torch/nn/init.py:412: UserWarning: Initializing zero-element tensors is a no-op
+  warnings.warn("Initializing zero-element tensors is a no-op")
+Killed
+slurmstepd: error: Detected 1 oom-kill event(s) in step 759909.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
